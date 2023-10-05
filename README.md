@@ -1,6 +1,6 @@
 # NavIC
 Python E2E simulation, C code for NavIC receiver design
-###Instructions:
+### Instructions
 ```
 $ git clone git@github.com:Ravisumanth/NavIC.git
 ```
