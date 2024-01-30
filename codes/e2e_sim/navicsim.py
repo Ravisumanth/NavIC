@@ -205,7 +205,6 @@ class NavicL5sModulator():
         numChannel = x.shape[1]
 
         spsBpskSig = 1-2*np.logical_xor(x, codeTable[np.arange(self.codePhase, self.codePhase+numSample)%codeNumSample, :])     # BPSK Modulated (SPS XOR PRN)
-
         # Subcarrier generation for BOC
         subCarr1Ch = self.__GenBocSubCarrier(numSample)     
         SubCarrSig = np.tile(np.array([subCarr1Ch]).T, (1, numChannel))
@@ -551,12 +550,12 @@ def navic_pcps_acquisition(x, prnSeq, fs, fSearch, threshold=0):
         YFFT = XFFT*prnSeqFFT
         Rxd[:,i] = (1/K)*np.fft.ifft(YFFT)      # IFFT for final product
 
-    maxIndex = np.argmax(np.abs(Rxd)**2)
+    maxIndex = np.argmax(np.abs(Rxd))#**2)
     maxCol = maxIndex%N
     maxRow = maxIndex//N
 
-    powIn = np.mean(np.abs(x)**2)
-    sMax = np.abs(Rxd[maxRow, maxCol])**2
+    powIn = np.mean(np.abs(x))#**2)
+    sMax = np.abs(Rxd[maxRow, maxCol])#**2
     thresholdEst = 2*K*sMax/powIn
 
     if(thresholdEst > threshold):
